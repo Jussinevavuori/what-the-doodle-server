@@ -1,5 +1,10 @@
 import { z, ZodError } from "zod";
 
+/**
+ * Utility function to create an event handler for a socket which validates data
+ * according to a zod schema and fires the onData function with correct typing
+ * on valid data and onError function on invalid data.
+ */
 export function createSocketEventHandler<T>(args: {
   schema: z.Schema<T>;
   onData: (t: T) => void;

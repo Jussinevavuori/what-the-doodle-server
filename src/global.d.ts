@@ -12,7 +12,7 @@ type Player = {
 type Round = {
   id: string;
   cardId: string;
-  title: string;
+  topic: string;
   picture: import("./lib/drawing/DrawingState").DrawingState;
   guess: string;
   drawerId: string;
@@ -22,22 +22,22 @@ type Round = {
 };
 
 /**
- * A single card consists of an initial title and multiple rounds which are
+ * A single card consists of an initial topic and multiple rounds which are
  * player alternating between drawing the latest guess (starting with the
- * initial title) and guessing the latest drawing. The title can be a free
- * player input or chosen from the given title options.
+ * initial topic) and guessing the latest drawing. The topic can be a free
+ * player input or chosen from the given topic options.
  */
 type Card = {
   id: string;
-  title: string;
-  titleOptions: string[];
+  topic: string;
+  topicOptions: string[];
   cardNumber: number;
 };
 
 /**
  * Current state:
  * - `"idle"` 		= Not starterd
- * - `"choose"`		= Choose titles
+ * - `"init"`			= Choose initial topics
  * - `"draw"` 		= A round is active in drawing phase
  * - `"guess"` 		= A round is active in guessing phase
  * - `"final"`		= Players are guessing their own

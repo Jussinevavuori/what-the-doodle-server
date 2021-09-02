@@ -5,13 +5,12 @@ import { randomInt } from "../functions/randomInt";
 import { randomInts } from "../functions/randomInts";
 import { rotateRight } from "../functions/rotateRight";
 import { shuffle } from "../functions/shuffle";
-import { initialTitles } from "./initialTitles";
-import { logGameState } from "./logGameState";
+import { TopicGenerator } from "./TopicGenerator";
 
-function getRandomTitles(n: number) {
-  return randomInts(n, initialTitles.length, true).map((i) => initialTitles[i]);
-}
-
+/**
+ * Based on the list of players, generates all cards and rounds for a gamestate
+ * object and assigns the given players to those rounds.
+ */
 export function generateGameData(players: Player[]): {
   cards: Card[];
   rounds: Round[];
@@ -19,6 +18,9 @@ export function generateGameData(players: Player[]): {
   // Utility shortcut: a game with n players has n cards and n rounds
   // per cards totaling n*n rounds.
   const n = players.length;
+
+  // Topic generator
+  const topicGenerator = new TopicGenerator();
 
   // List all cards and rounds
   const cards: Card[] = [];
@@ -53,9 +55,9 @@ export function generateGameData(players: Player[]): {
   for (let ci = 0; ci < n; ci++) {
     const card: Card = {
       id: `C#${padInt(ci, 2)}`,
-      title: "",
+      topic: "",
       cardNumber: ci,
-      titleOptions: getRandomTitles(3),
+      topicOptions: topicGenerator.getRandomTopics(3),
     };
     cards.push(card);
 
@@ -70,7 +72,7 @@ export function generateGameData(players: Player[]): {
         guesserId: "",
         roundNumber: ri,
         cardNumber: ci,
-        title: "",
+        topic: "",
       };
       rounds.push(round);
     }

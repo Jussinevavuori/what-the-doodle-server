@@ -74,7 +74,7 @@ export function startServer() {
       app.use("/api", rootRouter);
       logger("Configured endpoints");
       app.use("/api/test", (req, res) => {
-        res.send("It's working 🌈");
+        res.send("It's working! 🌈");
       });
 
       // Configure other endpoints to redirect user to app

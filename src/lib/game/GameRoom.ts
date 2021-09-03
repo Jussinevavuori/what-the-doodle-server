@@ -205,6 +205,9 @@ export class GameRoom {
       this.room.emit("@game/drawingTimeLeft", t);
     });
 
+    // Update state to all after new game is initialized
+    this.updateStateToAll();
+
     // New unsubscriber
     this.updatesUnsubscriber = () => {
       unsubscribeState();
